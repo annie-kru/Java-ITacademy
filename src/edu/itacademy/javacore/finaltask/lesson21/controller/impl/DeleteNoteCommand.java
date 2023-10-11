@@ -15,7 +15,7 @@ public class DeleteNoteCommand implements Command {
         String response = null;
         String[] params;
 
-        // validate request
+
         params = request.split("\n");
 
         try {

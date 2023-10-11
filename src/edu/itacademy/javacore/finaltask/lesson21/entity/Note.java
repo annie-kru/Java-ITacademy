@@ -11,30 +11,30 @@ public class Note {
     private int id;
     private String title;
     private String content;
-    private Date d;
+    private Date date;
 
     public Note() {}
 
 
-    public Note(int id, String title, String content, Date d) throws IOException {
+    public Note(int id, String title, String content, Date date) throws IOException {
         this.id = id;
         this.title = title;
         this.content = content;
-        this.d = d;
+        this.date = date;
     }
 
-    public Note(String title, String content, Date d) throws IOException {
+    public Note(String title, String content, Date date) throws IOException {
         this.id = GenerateId.nextId();
         this.title = title;
         this.content = content;
-        this.d = d;
+        this.date = date;
     }
 
     public Note(String title, String content) throws IOException {
         this.id = GenerateId.nextId();
         this.title = title;
         this.content = content;
-        this.d = new Date();
+        this.date = new Date();
     }
 
 
@@ -68,19 +68,19 @@ public class Note {
     }
 
 
-    public Date getD() {
-        return d;
+    public Date getDate() {
+        return date;
     }
 
 
-    public void setD(Date d) {
-        this.d = d;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
 
     @Override
     public int hashCode() {
-        return Objects.hash(content, d, id, title);
+        return Objects.hash(content, date, id, title);
     }
 
 
@@ -93,14 +93,14 @@ public class Note {
         if (getClass() != obj.getClass())
             return false;
         Note other = (Note) obj;
-        return Objects.equals(content, other.content) && Objects.equals(d, other.d) && id == other.id
+        return Objects.equals(content, other.content) && Objects.equals(date, other.date) && id == other.id
                 && Objects.equals(title, other.title);
     }
 
 
     @Override
     public String toString() {
-        return "Note [id=" + id + ", title=" + title + ", content=" + content + ", d=" + d + "]";
+        return "Note [id=" + id + ", title=" + title + ", content=" + content + ", d=" + date + "]";
     }
 
 }

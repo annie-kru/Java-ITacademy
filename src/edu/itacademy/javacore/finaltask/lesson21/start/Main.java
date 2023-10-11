@@ -16,11 +16,11 @@ public class Main {
 //        response = controller.doAction(request);
 //        System.out.println(response);
 
-//        request = "UPDATE\nid=1\ntitle=Словарь\ncontent=Толковый словарь\ndate=07-12-2023";
+//        request = "UPDATE\nid=2\ntitle=Словарь\ncontent=Толковый словарь\ndate=07-12-2023";
 //        response = controller.doAction(request);
 //        System.out.println(response);
 //
-//        request = "DELETE_NOTE\nid=8";
+//        request = "DELETE_NOTE\nid=1";
 //        response = controller.doAction(request);
 //        System.out.println(response);
 

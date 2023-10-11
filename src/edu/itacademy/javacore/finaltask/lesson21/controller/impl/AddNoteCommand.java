@@ -21,7 +21,7 @@ public class AddNoteCommand implements Command {
         String[] params;
         Note newNote;
 
-        // validate request
+
         params = request.split("\n");
         newNote = new Note();
         newNote.setTitle(params[1].split("=")[1]);
@@ -32,7 +32,7 @@ public class AddNoteCommand implements Command {
             System.err.println("ID generation error");
             e.printStackTrace();
         }
-        newNote.setD(new Date());
+        newNote.setDate(new Date());
 
         try {
             logic.add(newNote);

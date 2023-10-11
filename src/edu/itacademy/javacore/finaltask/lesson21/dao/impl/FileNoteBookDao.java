@@ -5,6 +5,7 @@ import edu.itacademy.javacore.finaltask.lesson21.dao.NoteBookDao;
 import edu.itacademy.javacore.finaltask.lesson21.entity.Note;
 
 import java.io.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,7 +20,7 @@ public class FileNoteBookDao implements NoteBookDao {
         try {
             bufWriter = new BufferedWriter(new FileWriter("resources/notes.txt", true));
 
-            bufWriter.write(n.getId() + " " + format.format(n.getD()) + " " + n.getTitle() + " " + n.getContent());
+            bufWriter.write(n.getId() + " " + format.format(n.getDate()) + " " + n.getTitle() + " " + n.getContent());
             bufWriter.newLine();
             bufWriter.close();
         } catch (IOException e) {
@@ -28,19 +29,28 @@ public class FileNoteBookDao implements NoteBookDao {
     }
 
     @Override
-    public List<Note> allNotes() {
+    public List<Note> allNotes() throws DaoException{
 
         List<Note> listNote = new ArrayList<>();
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         try  {
             InputStreamReader reader = new InputStreamReader(new FileInputStream("resources/notes.txt"), "UTF-8");
             BufferedReader breader = new BufferedReader(reader);
             String line = null;
+
             while ((line = breader.readLine()) != null) {
-                System.out.println(line);
+
+                String[] part = line.split(" ", 4);
+                int id = Integer.parseInt(part[0]);
+                Date date = format.parse(part[1]);
+                listNote.add(new Note(id, part[2], part[3], date));
+
             }
             reader.close();
         } catch (IOException e) {
             System.err.println("File not found");
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
 
         return listNote;
@@ -91,8 +101,8 @@ public class FileNoteBookDao implements NoteBookDao {
             writer = new BufferedWriter(new FileWriter(tempFile));
 
             String line;
-            Date date  =new Date();
-           requiredLine = n.getId() + " " + format.format(n.getD()) + " " + n.getTitle() + " " + n.getContent();
+            //Date date;
+           requiredLine = n.getId() + " " + format.format(n.getDate()) + " " + n.getTitle() + " " + n.getContent();
 
 
             while ((line = reader.readLine()) != null) {

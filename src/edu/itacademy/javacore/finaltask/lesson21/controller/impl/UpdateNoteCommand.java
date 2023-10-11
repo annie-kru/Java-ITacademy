@@ -22,7 +22,7 @@ public class UpdateNoteCommand implements Command {
         String[] params;
         Note newNote;
 
-        // validate request
+
         params = request.split("\n");
         newNote = new Note();
 
@@ -30,7 +30,7 @@ public class UpdateNoteCommand implements Command {
         newNote.setTitle(params[2].split("=")[1]);
         newNote.setContent(params[3].split("=")[1]);
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
         String dateInString = (params[4].split("=")[1]);
 
 
@@ -38,7 +38,7 @@ public class UpdateNoteCommand implements Command {
             Date date;
             date = format.parse(dateInString);
 
-           newNote.setD(date);
+           newNote.setDate(date);
 
             logic.update(newNote);
             response = "Запись обновлена успешно.";

@@ -19,14 +19,15 @@ public class FindNoteByTitleCommand implements Command {
         String[] params;
         List<Note> allNotes;
 
-        // validate request
+
         params = request.split("\n");
 
         try {
             allNotes = logic.find(params[1].split("=")[1]);
-            for (Note n : allNotes) {
-                System.out.println(n);
-            }
+//            for (Note n : allNotes) {
+//              System.out.println(n);
+//
+//            }
         } catch (NumberFormatException e) {
             response = "Что-то пошло не так. Попробуйте еще раз.";
         } catch (LogicException e) {

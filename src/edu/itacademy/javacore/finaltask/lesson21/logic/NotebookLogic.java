@@ -15,5 +15,5 @@ public interface NotebookLogic {
 
     public List<Note> find(String text) throws LogicException;
 
-    public List<Note> allNotes() throws LogicException;
+    public void allNotes() throws LogicException;
 }

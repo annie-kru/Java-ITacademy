@@ -7,7 +7,7 @@ import edu.itacademy.javacore.finaltask.lesson21.entity.Note;
 import edu.itacademy.javacore.finaltask.lesson21.logic.LogicException;
 import edu.itacademy.javacore.finaltask.lesson21.logic.NotebookLogic;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,28 +49,51 @@ public class NotebookLogicImpl implements NotebookLogic {
         List<Note> result = new ArrayList<>();
         List<Note> myNotes;
 
+
         try {
+            InputStreamReader reader = new InputStreamReader(new FileInputStream("resources/notes.txt"), "UTF-8");
+            BufferedReader breader = new BufferedReader(reader);
             myNotes = dao.allNotes();
             for (Note n : myNotes) {
+                String line = breader.readLine();
                 if (isTextInNote(n, text)) {
                     result.add(n);
+
+                    System.out.println(line);
                 }
             }
+            return result;
         } catch (DaoException e) {
             throw new LogicException(e);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        return result;
+
     }
-    private boolean isTextInNote(Note n, String text) throws LogicException {
-        return n.getTitle().contains(text) ;
+    private boolean isTextInNote(Note n, String text){
+        return n.getTitle().contains(text) || n.getContent().contains(text);
     } 
 
 
-    public List<Note> allNotes() throws LogicException {
+    public void allNotes() throws LogicException {
         try {
-            return dao.allNotes();
-        } catch (DaoException e) {
-            throw new LogicException(e);
+            InputStreamReader reader = new InputStreamReader(new FileInputStream("resources/notes.txt"), "UTF-8");
+            BufferedReader breader = new BufferedReader(reader);
+            String line = null;
+            while ((line = breader.readLine()) != null) {
+                System.out.println(line);
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

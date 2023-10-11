@@ -18,10 +18,10 @@ public class ShowAllNotesCommand implements Command {
         List<Note> allNotes;
 
         try {
-            allNotes = logic.allNotes();
-            for (Note n : allNotes) {
-                list.append(n.toString()).append("\n");
-            }
+             logic.allNotes();
+//            for (Note n : allNotes) {
+//                list.append(n.toString()).append("\n");
+//            }
         } catch (NumberFormatException e) {
             response = "Что-то пошло не так. Попробуйте еще раз.";
         } catch (LogicException e) {
